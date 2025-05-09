@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mfu.mapper.BoardfileMapper">
+	<insert id="insertBoardFile" parameterType="com.example.mfu.dto.Boardfile">
+		INSERT INTO boardfile(board_no, filename, filetype) VALUES (#{boardNo}, #{filename}, #{filetype})
+	</insert>
+	
+	<select id="selectBoardFile" parameterType="Integer" resultType="String">
+		SELECT filename FROM boardfile WHERE board_no = #{boardNo}
+	</select>
+	
+	<delete id="deleteFileOne" parameterType="String">
+		DELETE FROM boardfile where filename = #{filename}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="Integer">
+		DELETE FROM boardfile where board_no = #{boardNo}
+	</delete>
+	
+</mapper>
