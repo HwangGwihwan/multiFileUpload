@@ -5,7 +5,7 @@
 		INSERT INTO boardfile(board_no, filename, filetype) VALUES (#{boardNo}, #{filename}, #{filetype})
 	</insert>
 	
-	<select id="selectBoardFile" parameterType="Integer" resultType="String">
+	<select id="selectBoardFile" parameterType="Integer" resultType="com.example.mfu.dto.Boardfile">
 		SELECT filename FROM boardfile WHERE board_no = #{boardNo}
 	</select>
 	

@@ -69,23 +69,25 @@ public class BoardService {
 		return boardList;
 	}
 	
-	public BoardForm selectBoardFile(int boardNo) {
-		BoardForm boardForm = new BoardForm();
-		Board board = boardMapper.selectBoardOne(boardNo);
-		boardForm.setBoardTitle(board.getBoardTitle());
-		List<MultipartFile> fileList = boardfileMapper.selectBoardFile(boardNo);
-		boardForm.setBoardfile(fileList);
-		return boardForm;
-	}
-	
-	public int deleteFileOne(String fileName) {
-		int row = boardfileMapper.deleteFileOne(fileName);
-		return row;
-	}
-	
 	public Board selectBoardOne(int boardNo) {
 		Board board = boardMapper.selectBoardOne(boardNo);
 		return board;
+	}
+	
+	public List<Boardfile> selectBoardFile(int boardNo) {
+		List<Boardfile> fileList = boardfileMapper.selectBoardFile(boardNo);
+		return fileList;
+	}
+	
+	public int deleteFileOne(String fileName) {
+		// 파일삭제
+		File f = new File("c:/project/upload/" + fileName);
+		if (f.exists()) {
+			f.delete();	
+		}
+		
+		int row = boardfileMapper.deleteFileOne(fileName);
+		return row;
 	}
 	
 	public int updateBoard(Board board) {
@@ -94,6 +96,16 @@ public class BoardService {
 	}
 	
 	public int deleteBoard(int boardNo) {
+		List<Boardfile> list = boardfileMapper.selectBoardFile(boardNo);
+				
+		for (Boardfile b : list) {
+			// 파일삭제
+			File f = new File("c:/project/upload/" + b.getFilename());
+			if (f.exists()) {
+				f.delete();	
+			}
+		}
+		
 		int row1 = boardfileMapper.deleteFile(boardNo);
 		int row2 = boardMapper.deleteBoard(boardNo);
 		return row2;

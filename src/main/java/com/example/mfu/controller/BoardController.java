@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.mfu.dto.Board;
 import com.example.mfu.dto.BoardForm;
+import com.example.mfu.dto.Boardfile;
 import com.example.mfu.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,10 +45,10 @@ public class BoardController {
 	@GetMapping("/boardOne")
 	public String boardOne(@RequestParam int boardNo, Model model) {
 		//log.info("" + boardNo);
-		BoardForm boardForm = boardService.selectBoardFile(boardNo);
-		log.info(boardForm.toString());
-		model.addAttribute("boardForm", boardForm);
-		model.addAttribute("boardNo", boardNo);
+		Board board = boardService.selectBoardOne(boardNo);
+		List<Boardfile> list = boardService.selectBoardFile(boardNo);
+		model.addAttribute("board", board);
+		model.addAttribute("list", list);
 		return "boardOne";
 	}
 	

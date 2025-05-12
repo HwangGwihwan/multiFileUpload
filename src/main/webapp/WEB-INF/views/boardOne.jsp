@@ -11,14 +11,14 @@
 	<h1>boardOne</h1>
 	<a href="${pageContext.request.contextPath}/boardList">리스트...</a>
 	<div>
-		<h3>${boardForm.boardTitle}</h3>
-		<a href="${pageContext.request.contextPath}/updateBoard?boardNo=${boardNo}">수정</a>
-		<a href="${pageContext.request.contextPath}/deleteBoard?boardNo=${boardNo}">삭제</a>
+		<h3>${board.boardTitle}</h3>
+		<a href="${pageContext.request.contextPath}/updateBoard?boardNo=${board.boardNo}">수정</a>
+		<a href="${pageContext.request.contextPath}/deleteBoard?boardNo=${board.boardNo}">삭제</a>
 	</div>
-	<c:forEach var="filename" items="${boardForm.boardfile}">
+	<c:forEach var="file" items="${list}">
 		<div>
-			<img src="/upload/${filename}" width="300" height="200">
-			<a href="${pageContext.request.contextPath}/deletefileOne?filename=${filename}&boardNo=${boardNo}">삭제</a>
+			<img src="/upload/${file.filename}" width="300" height="200">
+			<a href="${pageContext.request.contextPath}/deletefileOne?filename=${file.filename}&boardNo=${board.boardNo}">삭제</a>
 		</div>
 	</c:forEach>
 </body>

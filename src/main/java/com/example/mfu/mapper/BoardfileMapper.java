@@ -10,7 +10,7 @@ import com.example.mfu.dto.Boardfile;
 @Mapper
 public interface BoardfileMapper {
 	int insertBoardFile(Boardfile boardfile);
-	List<MultipartFile> selectBoardFile(int boardNo);
+	List<Boardfile> selectBoardFile(int boardNo);
 	int deleteFileOne(String filename);
 	int deleteFile(int boardNo);
 }
